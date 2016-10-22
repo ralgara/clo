@@ -1,7 +1,10 @@
 # Clojure Sessions #3 - Date TBD
 ## RECURSION
+
+Clojure, owing to its roots in LISP and influences from Haskell, Erlang and others, has a wide variety of options to express recursive programs.
+
 ***
-## Step 1: the mandatory Fibonacci example
+## Mandatory Fibonacci example
 
 There are dozens of approaches to recursion...
 
@@ -22,7 +25,29 @@ There are dozens of approaches to recursion...
     ; what's happening?
     (time (fib-nth 40))
 
-The naive approach blindly recalculates the function for every `n`. We need to cache (a.k.a. _memoize_) our outputs. Many possible ways exist; a handy one is [lazy-seq](https://clojuredocs.org/clojure.core/lazy-seq)  
+The naive approach blindly recalculates the function for every `n`. We need to cache (a.k.a. _memoize_) our outputs. Many possible ways exist.
+
+## Detour into laziness
+
+    (nth [1 2 3 4 5] 3) ; eager
+
+    (nth (range 0 1e8 7) 21) ; lazy
+
+    (nth (range 0 1e8 1E5) 21) ; lazy
+
+    (def s (range 0 1e7 7))
+
+    (count s) ; !!!
+
+    (take 10 s)
+
+    (take-last 10 s) ; !!!
+
+
+
+; a handy one is [lazy-seq](https://clojuredocs.org/clojure.core/lazy-seq).
+
+
 
 
 ## Import dependencies (see project.clj)
