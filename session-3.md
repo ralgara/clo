@@ -6,7 +6,7 @@ Clojure, owing to its roots in LISP and influences from Haskell, Erlang and othe
 ***
 ## Mandatory Fibonacci example
 
-There are dozens of approaches to recursion...
+There are dozens of approaches to recursion. Let's start simple.
 
     ; naive implementation
     (defn fib-nth [n]
@@ -25,7 +25,20 @@ There are dozens of approaches to recursion...
     ; what's happening?
     (time (fib-nth 40))
 
+
+
 The naive approach blindly recalculates the function for every `n`. We need to cache (a.k.a. _memoize_) our outputs. Many possible ways exist.
+
+And so, our first optimization    
+
+    (def fib-nth
+      (memoize
+        (fn [n]
+          (if (< n 2)
+            n
+            (+
+              (fib-nth (- n 1))
+              (fib-nth (- n 2)))))))
 
 ## Detour into laziness
 
